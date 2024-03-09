@@ -1,9 +1,9 @@
-import 'package:datacode_interview/home_page.dart';
-import 'package:datacode_interview/repositories.dart';
+import 'package:datacode_interview/services/repositories.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'blocs/app_blocs.dart';
+import '../blocs/app_blocs.dart';
 import 'exchange_page.dart';
+import 'home_page.dart';
 
 class MyApp extends StatelessWidget {
 
