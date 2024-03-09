@@ -55,14 +55,14 @@ class UserRepository {
 }
 
 class ExchangeRepository {
-
+  bool isCompleted=false;
   final BuildContext context;
   ExchangeRepository(this.context);
-  void getExchange(){
+  Future<CurrencyModel> getExchange(){
     final channel = WebSocketChannel.connect(
       Uri.parse('wss://ws.kraken.com'),
     );
-    // Completer<CurrencyModel> completer = Completer<CurrencyModel>();
+    Completer<CurrencyModel> completer = Completer<CurrencyModel>();
     // WebSocketChannel channel= WebSocketService().channel;
 
       channel.sink.add('{"event":"subscribe", "pair":["XBT/USD"], "subscription":{"name":"ticker"}}');
@@ -70,10 +70,13 @@ class ExchangeRepository {
             (data) {
           if(data.toString()[0]=="["){
             print("^^^^^^^^^^");
-            print(CurrencyModel.fromJson(json.decode(data)[1]).price);
-
-            BlocProvider.of<ExchangeBloc>(context).emit(ExchangeLoadedState(CurrencyModel.fromJson(json.decode(data)[1])));
-            // completer.complete(CurrencyModel.fromJson(json.decode(data)[1]));
+            print(CurrencyModel.fromJson(json.decode(data)[1]));
+            // print(json.decode(data)[1]);
+            // BlocProvider.of<ExchangeBloc>(context).emit(ExchangeLoadedState(CurrencyModel.fromJson(json.decode(data)[1])));
+            if(!isCompleted){
+              completer.complete(CurrencyModel.fromJson(json.decode(data)[1]));
+              isCompleted=true;
+            }
           }else {
             // print("##########${data}");
           }
@@ -86,7 +89,7 @@ class ExchangeRepository {
         },
       );
 
-    // return completer.future;
+    return completer.future;
   }
 }
 
