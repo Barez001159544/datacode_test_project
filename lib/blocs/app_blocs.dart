@@ -9,11 +9,8 @@ class ExchangeBloc extends Bloc<ExchangeEvent, ExchangeState> {
   ExchangeBloc(this._exchangeRepository) : super(ExchangeLoadingState()) {
     on<LoadExchangeEvent>((event, emit) async {
       emit(ExchangeLoadingState());
-      try {
-        final exchange= await _exchangeRepository.getExchange();
+      await for (final exchange in _exchangeRepository.getExchangeStream()) {
         emit(ExchangeLoadedState(exchange));
-      } catch (e) {
-        emit(ExchangeErrorState(e.toString()));
       }
     });
   }
