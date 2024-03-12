@@ -21,5 +21,6 @@ flutter pub get
 - Run the application on a connected device or emulator:
 run flutter
 
-## Assumptions:
-Despite the project pushing the boundaries of my capabilities, I have managed to reach this point. While the outcome might not meet all requirements, I have exerted my best effort and sought assistance where necessary. This represents the extent of what I can achieve at this stage. To explore the project further, please visit the website through this link: [[btc_datacode]](https://barez001159544.github.io/btc_datacode.github.io/).
+## preview:  [[Show Live Project]](https://barez001159544.github.io/btc_datacode.github.io/)
+
+![Screenshot 2024-03-13 022029](https://github.com/Barez001159544/datacode_test_project/assets/85757765/420661df-9a08-441e-950f-88fdf40be692)
